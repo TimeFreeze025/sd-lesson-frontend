@@ -19,4 +19,13 @@ export const MOCK_SUBJECTS: Subject[] = [
     createdAt: "2023-01-02T00:00:00Z",
     updatedAt: "2023-01-02T00:00:00Z",
   },
+  {
+    id: 3,
+    code: "PHYS301",
+    name: "Physics I",
+    department: "Physics",
+    description: "An introductory course on classical mechanics.",
+    createdAt: "2023-01-03T00:00:00Z",
+    updatedAt: "2023-01-03T00:00:00Z",
+  },
 ];
