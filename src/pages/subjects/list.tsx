@@ -34,13 +34,7 @@ const SubjectsList = () => {
         ];
 
   const searchFilter = searchQuery
-    ? [
-        {
-          field: "name",
-          operator: "contains" as const,
-          value: searchQuery,
-        },
-      ]
+    ? [{ field: "name", operator: "contains" as const, value: searchQuery }]
     : [];
 
   const subjectTable = useTable<Subject>({
@@ -53,9 +47,7 @@ const SubjectsList = () => {
           header: () => {
             return <p className="column-title ml-2">Code</p>;
           },
-          cell: ({ getValue }) => {
-            return <Badge>{getValue<string>()}</Badge>;
-          },
+          cell: ({ getValue }) => <Badge>{getValue<string>()}</Badge>,
         },
         {
           id: "name",
@@ -64,23 +56,22 @@ const SubjectsList = () => {
           header: () => {
             return <p className="column-title">Name</p>;
           },
-          cell: ({ getValue }) => {
-            return (
-              <span className="text-foreground">{getValue<string>()}</span>
-            );
-          },
+          cell: ({ getValue }) => (
+            <span className="text-foreground">{getValue<string>()}</span>
+          ),
           filterFn: "includesString",
         },
         {
           id: "department",
-          accessorKey: "department",
+          // accessorKey: "department",
+          accessorKey: "department.name",
           size: 200,
           header: () => {
             return <p className="column-title">Department</p>;
           },
-          cell: ({ getValue }) => {
-            return <Badge variant={"secondary"}>{getValue<string>()}</Badge>;
-          },
+          cell: ({ getValue }) => (
+            <Badge variant="secondary">{getValue<string>()}</Badge>
+          ),
         },
         {
           id: "description",
@@ -89,14 +80,9 @@ const SubjectsList = () => {
           header: () => {
             return <p className="column-title">Description</p>;
           },
-          cell: ({ getValue }) => {
-            return (
-              <span className="truncate line-clamp-2">
-                {getValue<string>()}
-              </span>
-            );
-          },
-          filterFn: "includesString",
+          cell: ({ getValue }) => (
+            <span className="truncate line-clamp-2">{getValue<string>()}</span>
+          ),
         },
       ],
       [],
@@ -133,6 +119,7 @@ const SubjectsList = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+
           <div className="flex gap-2 w-full sm:w-auto">
             <Select
               value={selectedDepartment}
