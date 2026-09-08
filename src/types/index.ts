@@ -17,3 +17,43 @@ export type ListResponse<T = unknown> = {
     totalPages: number;
   };
 };
+
+export interface UploadWidgetValue {
+  url: string;
+  publicId: string;
+}
+
+export type UploadWidgetProps = {
+  value?: UploadWidgetValue | null;
+  onChange?: (value: UploadWidgetValue | null) => void;
+  disabled?: boolean;
+};
+
+declare global {
+  interface Window {
+    cloudinary?: {
+      createUploadWidget: (
+        options: Record<string, unknown>,
+        callback: (
+          error: unknown,
+          result: CloudinaryUploadWidgetResults,
+        ) => void,
+      ) => CloudinaryWidget;
+    };
+  }
+}
+
+export interface CloudinaryWidget {
+  open: () => void;
+}
+
+export interface CloudinaryUploadWidgetResults {
+  event: string;
+  info: {
+    secure_url: string;
+    public_id: string;
+    delete_token?: string;
+    resource_type: string;
+    original_filename: string;
+  };
+}
